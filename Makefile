@@ -3,7 +3,7 @@ CFLAGS = -Wall -std=c99
 # -Wextra
 
 # Source files
-SRCS = autosar_simu.c simulatedControllFlow.c 
+SRCS = autosar_simu.c simulatedControllFlow.c runnable_Input_Controller.c runnable_Cornering_Light_Logic.c
 
 # Object files
 OBJS = $(SRCS:.c=.o)
