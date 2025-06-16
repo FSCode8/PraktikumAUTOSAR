@@ -7,5 +7,4 @@ General Architecture:
 
 
 Archtitecture of central ECU:
-![ZSE_Composition](https://github.com/user-attachments/assets/59935914-8366-4a0e-bb33-8f71e62a3421)
-
+![ZSE_Composition](https://github.com/user-attachments/assets/9ca3b0e4-3738-4657-86f9-066aa25271ad)
