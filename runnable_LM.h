@@ -6,7 +6,7 @@
 #include "autosar_simu.h"
 
 // Runnable
-ReturnType LM_runnable(void);
+ReturnType LM_Controller_runnable(void);
 
 
 #endif

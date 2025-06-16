@@ -1,7 +1,3 @@
-#include <stdint.h>
-#include <stdbool.h>
-#include <stdio.h>
-
 #include "runnable_Cornering_Light_Logic.h"
 
 ReturnType Cornering_Light_Logic_runnable(void)
@@ -35,8 +31,6 @@ ReturnType Cornering_Light_Logic_runnable(void)
         status = Rte_Write_MSG_CornerLightsStatus(0x00); // send Message
         return status;
     }
-
-    printf("MSG_SteeringAngle_value: %d\n", MSG_SteeringAngle_value);
    
     // #23
     if(MSG_SteeringAngle_value <= 15 && MSG_SteeringAngle_value >= -15) // steering angle is in default range
@@ -52,12 +46,12 @@ ReturnType Cornering_Light_Logic_runnable(void)
         // #20
         if(MSG_SteeringAngle_value > 20) // right
         {
-            status = Rte_Write_MSG_CornerLightsStatus(0x05); // send Message
+            status = Rte_Write_MSG_CornerLightsStatus(0x04); // send Message
             return status;
         }
         if(MSG_SteeringAngle_value < -20)  // left
         {
-            status = Rte_Write_MSG_CornerLightsStatus(0x0A); // send Message
+            status = Rte_Write_MSG_CornerLightsStatus(0x08); // send Message
             return status;
         }
     }
@@ -71,12 +65,12 @@ ReturnType Cornering_Light_Logic_runnable(void)
             {
                 if((MSG_IndicatorLights_value & 0x50) == 0x50) // right Indicator Lights on (0000 1111)
                 {
-                    status = Rte_Write_MSG_CornerLightsStatus(0x05); // send Message
+                    status = Rte_Write_MSG_CornerLightsStatus(0x04); // send Message
                     return status;
                 }
                 else if((MSG_IndicatorLights_value & 0xA0) == 0xA0) // left Indicator Lights on (0000 1111)
                 {
-                    status = Rte_Write_MSG_CornerLightsStatus(0x0A); // send Message
+                    status = Rte_Write_MSG_CornerLightsStatus(0x08); // send Message
                     return status;
                 }
             }

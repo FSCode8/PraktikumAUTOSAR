@@ -78,7 +78,7 @@ ReturnType control_indicator_light_special(uint8_t toggle)
     return OK;
 }
 
-ReturnType LM_runnable(void)
+ReturnType LM_Controller_runnable(void)
 {
     ReturnType status = OK;
 
@@ -87,106 +87,117 @@ ReturnType LM_runnable(void)
     uint8_t indicator_light =  0;
     uint8_t cornering_light = 0;
 
-    
+    uint8_t blink_period = 0; // 1 if in an uninterruptable blink-period
+
+    static uint64_t time_ms = 0;
 
     status = Rte_Read_MSG_LM(&MSG_LM_value);
     if (status != OK) return status;
 
-    if(flag_position == 1)
+    if(blink_period)
     {
-        if((MSG_LM_value & 0x08) != 0)
-        {
-           cornering_light=1;
-        }
-        else
-        {
-            cornering_light=0;
-        }
-
-        if ((MSG_LM_value & 0x80) != 0)
-        {
-            indicator_light=1;
-        }
-        else
-        {
-            indicator_light=0;
-        }
-        
 
     }
-    else if(flag_position == 2)
+    else
     {
-        if((MSG_LM_value & 0x04) != 0)
+        if(flag_position == 1)
         {
-           cornering_light=1;
+            if((MSG_LM_value & 0x08) != 0)
+            {
+            cornering_light=1;
+            }
+            else
+            {
+                cornering_light=0;
+            }
+
+            if ((MSG_LM_value & 0x80) != 0)
+            {
+                indicator_light=1;
+            }
+            else
+            {
+                indicator_light=0;
+            }
+            
+
         }
-        else
+        else if(flag_position == 2)
         {
-            cornering_light=0;
+            if((MSG_LM_value & 0x04) != 0)
+            {
+            cornering_light=1;
+            }
+            else
+            {
+                cornering_light=0;
+            }
+
+            if ((MSG_LM_value & 0x40) != 0)
+            {
+                indicator_light=1;
+            }
+            else
+            {
+                indicator_light=0;
+            }
+        }
+        else if(flag_position == 3)
+        {
+            if((MSG_LM_value & 0x02) != 0)
+            {
+            cornering_light=1;
+            }
+            else
+            {
+                cornering_light=0;
+            }
+
+            if ((MSG_LM_value & 0x20) != 0)
+            {
+                indicator_light=1;
+            }
+            else
+            {
+                indicator_light=0;
+            }
+        }
+        else if(flag_position == 4)
+        {
+                if((MSG_LM_value & 0x01) != 0)
+            {
+            cornering_light=1;
+            }
+            else
+            {
+                cornering_light=0;
+            }
+
+            if ((MSG_LM_value & 0x10) != 0)
+            {
+                indicator_light=1;
+            }
+            else
+            {
+                indicator_light=0;
+            }
         }
 
-        if ((MSG_LM_value & 0x40) != 0)
-        {
-            indicator_light=1;
-        }
-        else
-        {
-            indicator_light=0;
-        }
-    }
-    else if(flag_position == 3)
-    {
-        if((MSG_LM_value & 0x02) != 0)
-        {
-           cornering_light=1;
-        }
-        else
-        {
-            cornering_light=0;
-        }
-
-        if ((MSG_LM_value & 0x20) != 0)
-        {
-            indicator_light=1;
-        }
-        else
-        {
-            indicator_light=0;
-        }
-    }
-    else if(flag_position == 4)
-    {
-        	if((MSG_LM_value & 0x01) != 0)
-        {
-           cornering_light=1;
-        }
-        else
-        {
-            cornering_light=0;
-        }
-
-        if ((MSG_LM_value & 0x10) != 0)
-        {
-            indicator_light=1;
-        }
-        else
-        {
-            indicator_light=0;
-        }
-    }
-
-    status = control_cornering_light(cornering_light); // control the cornering light based on the flag_position
-    if (status != OK) return status;
-
-    if (flag_special_equipment == 0)
-    {
-        status = control_indicator_light_basic(indicator_light); // control the indicator light based on the flag_position
+        status = control_cornering_light(cornering_light); // control the cornering light based on the flag_position
         if (status != OK) return status;
+
+        if (flag_special_equipment == 0)
+        {
+            status = control_indicator_light_basic(indicator_light); // control the indicator light based on the flag_position
+            if (status != OK) return status;
+        }
+        else if (flag_special_equipment == 1)
+        {
+            control_indicator_light_special(indicator_light); // control the indicator light based on the flag_position
+            if (status != OK) return status;
+        }
+
     }
-    else if (flag_special_equipment == 1)
-    {
-        control_indicator_light_special(indicator_light); // control the indicator light based on the flag_position
-        if (status != OK) return status;
-    }
+    
     return status;
 }
