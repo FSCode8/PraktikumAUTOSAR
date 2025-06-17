@@ -3,6 +3,8 @@
 
 # Executables
 program
+run_tests
+*.exe
 
 # VS Code settings
 /.vscode
