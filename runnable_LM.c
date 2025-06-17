@@ -1,7 +1,7 @@
 #include "runnable_LM.h"
 
 uint8_t flag_position = 1; // 1 -> front left, 2 -> front right, 3 -> rear left, 4 -> rear right
-uint8_t flag_special_equipment = 1; // 0 -> no special equipment, 1 -> special equipment
+uint8_t flag_special_equipment = 0; // 0 -> no special equipment, 1 -> special equipment
 
 uint8_t debug_LEDs_statuses [7] = {0};
 uint8_t debug_indicator_status = 0;

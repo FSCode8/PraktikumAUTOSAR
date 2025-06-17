@@ -36,10 +36,15 @@ int get_test_result();
 #define ASSERT_EQ(expected, actual, test_name) \
     _assert_eq((long long)(expected), (long long)(actual), (test_name), __FILE__, __LINE__)
 
+#define ASSERT_UINT8_EQ(expected, actual, test_name) \
+    _assert_uint8_eq((expected), (actual), (test_name), __FILE__, __LINE__)
+
 /* --- Internal Helper Function Declarations (for use by macros) --- */
 // These are not meant to be called directly by the user, but the macros need them.
 void _assert_true(int condition, const char* test_name, const char* file, int line);
 void _assert_str_eq(const char* expected, const char* actual, const char* test_name, const char* file, int line);
 void _assert_eq(long long expected, long long actual, const char* test_name, const char* file, int line);
+void _assert_uint8_eq(uint8_t expected, uint8_t actual, const char* test_name, const char* file, int line);
+
 
 #endif // MY_TEST_H

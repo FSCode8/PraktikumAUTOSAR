@@ -9,15 +9,13 @@
 
 // Function 
 
-ReturnType set_Input_values(int8_t IndicatorLever, int16_t SteeringAngle, uint8_t HazardLightsStatus, uint8_t CarLightsStatus, int16_t Velocity)
+void set_Input_values(int8_t IndicatorLever, int16_t SteeringAngle, uint8_t HazardLightsStatus, uint8_t CarLightsStatus, int16_t Velocity)
 {
     IndicatorLever_value = IndicatorLever;
     SteeringAngle_value = SteeringAngle;
     HazardLightsStatus_value = HazardLightsStatus;
     CarLightsStatus_value = CarLightsStatus;
     Velocity_value = Velocity; 
-
-    return OK;
 }
 
 ReturnType scheduling_cycle_ZSE()
@@ -26,7 +24,8 @@ ReturnType scheduling_cycle_ZSE()
 
     Input_Controller_runnable();
     if (status != OK) return status;
-    //Indicator_Light_Logic_runnable();
+    Indicator_Light_Logic_runnable();
+    if (status != OK) return status;
     Cornering_Light_Logic_runnable();
     if (status != OK) return status;
     Message_Controller_runnable();

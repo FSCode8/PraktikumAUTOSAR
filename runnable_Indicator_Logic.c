@@ -40,6 +40,8 @@ ReturnType Indicator_Light_Logic_runnable(void)
     int8_t MSG_IndicatorLever_value = 0; // 0 = neutral, 1 = right-tip, 2 = right-set, -1 = left-tip, -2 = left-set
     uint8_t MSG_HazardLightsStatus_value = 0; // 0 = off, 1 = on
 
+    uint8_t MSG_IndicatorLights_value = 0;
+
     // Read values from RTE
     Rte_Read_MSG_IndicatorLever(&MSG_IndicatorLever_value);
     if (status != OK) return status;
@@ -61,7 +63,7 @@ ReturnType Indicator_Light_Logic_runnable(void)
         }
         else
         {
-            if(time_ms-last_sending_ms >= 1000)
+            if(time_ms-last_sending_ms == 1000)
             {
                 status = Rte_Write_MSG_IndicatorLights(0xF0); // Hazard lights on
                 if (status != OK) return status;
@@ -75,8 +77,6 @@ ReturnType Indicator_Light_Logic_runnable(void)
     }
     else    // Hazard lights off
     {
-        uint8_t MSG_IndicatorLights_value;
-
         if(!blinking)   // Not blinking before
         {
             if (MSG_IndicatorLever_value != 0)
@@ -107,7 +107,7 @@ ReturnType Indicator_Light_Logic_runnable(void)
             }
             else if(previousIndicatorStatus == MSG_IndicatorLever_value) // same state
             {
-                if(time_ms-last_sending_ms >= 1000) // full blinking period
+                if(time_ms-last_sending_ms == 1000) // full blinking period
                 {
                     if (MSG_IndicatorLever_value == 0)  // neutral state 
                     {
@@ -156,7 +156,7 @@ ReturnType Indicator_Light_Logic_runnable(void)
                 {
                     if(num_blink < 3)
                     {
-                        if(time_ms-last_sending_ms >= 1000)
+                        if(time_ms-last_sending_ms == 1000)
                         {
                             status = Rte_Write_MSG_IndicatorLights(previous_MSG);
                             if (status != OK) return status;
@@ -182,7 +182,7 @@ ReturnType Indicator_Light_Logic_runnable(void)
                 }
                 else
                 {
-                    if(time_ms-last_sending_ms >= 1000)
+                    if(time_ms-last_sending_ms == 1000)
                     {
                         MSG_IndicatorLights_value = convert_IndicatorLever_to_IndicatorMSG(MSG_IndicatorLever_value);
                         if(MSG_IndicatorLights_value == 0xFF) return ERROR;

@@ -33,7 +33,7 @@ ReturnType Message_Controller_runnable()
     }   
     else
     {
-        if (time_ms-last_sending_ms >= 1000)
+        if (time_ms-last_sending_ms == 1000)
         {
             MSG_LM = MSG_IndicatorLights | MSG_CornerLightsStatus;
             status = Rte_Write_MSG_LM(MSG_LM);
@@ -44,7 +44,7 @@ ReturnType Message_Controller_runnable()
         }
         else if(MSG_CornerLightsStatus != previous_MSG_CornerLightsStatus)
         {
-            MSG_LM = MSG_CornerLightsStatus;
+            MSG_LM = previous_MSG_IndicatorLights | MSG_CornerLightsStatus;
             status = Rte_Write_MSG_LM(MSG_LM);
             if (status != OK) return status;
             previous_MSG_CornerLightsStatus = MSG_CornerLightsStatus;

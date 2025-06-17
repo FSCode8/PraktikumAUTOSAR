@@ -62,3 +62,15 @@ void _assert_eq(long long expected, long long actual, const char* test_name, con
         tests_failed++;
     }
 }
+
+void _assert_uint8_eq(uint8_t expected, uint8_t actual, const char* test_name, const char* file, int line) {
+    tests_run++;
+    if (expected == actual) {
+        printf(GREEN "PASS" RESET ": %s\n", test_name);
+        tests_passed++;
+    } else {
+        printf(RED "FAIL" RESET ": %s - Expected: 0x%02X, Got: 0x%02X at %s:%d\n",
+               test_name, expected, actual, file, line);
+        tests_failed++;
+    }
+}

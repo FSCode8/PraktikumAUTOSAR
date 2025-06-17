@@ -37,8 +37,8 @@ ReturnType Cornering_Light_Logic_runnable(void)
     {
         if(MSG_IndicatorLever_value == 0)  
         {
-            status = Rte_Write_MSG_CornerLightsStatus(0x00); // send Message
-             
+            status = Rte_Write_MSG_CornerLightsStatus(0x00); // send Message 
+            return status;
         }
     }
     else 
@@ -66,12 +66,10 @@ ReturnType Cornering_Light_Logic_runnable(void)
                 if((MSG_IndicatorLights_value & 0x50) == 0x50) // right Indicator Lights on (0000 1111)
                 {
                     status = Rte_Write_MSG_CornerLightsStatus(0x04); // send Message
-                    return status;
                 }
                 else if((MSG_IndicatorLights_value & 0xA0) == 0xA0) // left Indicator Lights on (0000 1111)
                 {
                     status = Rte_Write_MSG_CornerLightsStatus(0x08); // send Message
-                    return status;
                 }
             }
         } 
