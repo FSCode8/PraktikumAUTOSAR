@@ -2,47 +2,45 @@
 //#include "Pwm.h"
 //#include "Spi.h"
 
+#define RED_LED_CHANNEL 0
+#define GREEN_LED_CHANNEL 1
+#define BLUE_LED_CHANNEL 2
+
 // PWM LED Control Functions
 // ========================
 
 /**
  * Set RGB LED brightness using PWM
- * @param red_channel: PWM channel for red LED
- * @param green_channel: PWM channel for green LED  
- * @param blue_channel: PWM channel for blue LED
  * @param red_brightness: 0x0000 (min) to 0x8000 (max)
  * @param green_brightness: 0x0000 (min) to 0x8000 (max)
  * @param blue_brightness: 0x0000 (min) to 0x8000 (max)
  */
-void SetRgbLed(Pwm_ChannelType red_channel, Pwm_ChannelType green_channel, 
-               Pwm_ChannelType blue_channel, uint16 red_brightness, 
+void SetRgbLed(uint16 red_brightness, 
                uint16 green_brightness, uint16 blue_brightness)
 {
-    Pwm_SetDutyCycle(red_channel, red_brightness);
-    Pwm_SetDutyCycle(green_channel, green_brightness);
-    Pwm_SetDutyCycle(blue_channel, blue_brightness);
+    Pwm_SetDutyCycle(RED_LED_CHANNEL, red_brightness);
+    Pwm_SetDutyCycle(GREEN_LED_CHANNEL, green_brightness);
+    Pwm_SetDutyCycle(BLUE_LED_CHANNEL, blue_brightness);
 }
 
 /**
  * Turn off RGB LED completely
  */
-void TurnOffRgbLed(Pwm_ChannelType red_channel, Pwm_ChannelType green_channel, 
-                   Pwm_ChannelType blue_channel)
+void TurnOffRgbLed()
 {
-    Pwm_SetDutyCycle(red_channel, 0x0000);
-    Pwm_SetDutyCycle(green_channel, 0x0000);
-    Pwm_SetDutyCycle(blue_channel, 0x0000);
+    Pwm_SetDutyCycle(RED_LED_CHANNEL, 0x0000);
+    Pwm_SetDutyCycle(GREEN_LED_CHANNEL, 0x0000);
+    Pwm_SetDutyCycle(BLUE_LED_CHANNEL, 0x0000);
 }
 
 /**
  * Set RGB LED to maximum brightness
  */
-void SetRgbLedMax(Pwm_ChannelType red_channel, Pwm_ChannelType green_channel, 
-                  Pwm_ChannelType blue_channel)
+void SetRgbLedMax(void)
 {
-    Pwm_SetDutyCycle(red_channel, 0x8000);
-    Pwm_SetDutyCycle(green_channel, 0x8000);
-    Pwm_SetDutyCycle(blue_channel, 0x8000);
+    Pwm_SetDutyCycle(RED_LED_CHANNEL, 0x8000);
+    Pwm_SetDutyCycle(GREEN_LED_CHANNEL, 0x8000);
+    Pwm_SetDutyCycle(BLUE_LED_CHANNEL, 0x8000);
 }
 
 // SPI LED Stripe Control Functions
@@ -105,21 +103,16 @@ void ClearLedStripe(void)
 // =======================
 
 void LedControlExample(void)
-{
-    // Example PWM channel assignments (adjust based on your configuration)
-    Pwm_ChannelType pwm_red = 0;
-    Pwm_ChannelType pwm_green = 1;
-    Pwm_ChannelType pwm_blue = 2;
-    
+{    
     // Initialize LED stripe buffer
     ClearLedStripe();
     
-    // Example 1: Set PWM LED to purple (red + blue)
-    SetRgbLed(pwm_red, pwm_green, pwm_blue, 0x8000, 0x0000, 0x8000);
+    // Example 1: Set PWM LED to yellow 
+    SetRgbLed(0x8000, 0x8000, 0x0000);
     
     // Example 2: Set first 3 LEDs in stripe to different colors
     SetStripeLedColor(0, 255, 0, 0);    // LED 0: Red
-    SetStripeLedColor(1, 0, 255, 0);    // LED 1: Green  
-    SetStripeLedColor(2, 0, 0, 255);    // LED 2: Blue
+    SetStripeLedColor(1, 255, 0, 0);    // LED 1: Red  
+    SetStripeLedColor(2, 255, 0, 0);    // LED 2: Red
     UpdateLedStripe();
 }
