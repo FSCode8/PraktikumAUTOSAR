@@ -98,11 +98,19 @@ Std_ReturnType Indicator_Light_Logic_runnable(void)
         {
             if(previousIndicatorStatus == 0x0F) // Hazard lights change
             {
-                previousIndicatorStatus = MSG_IndicatorLever_value;
-                
-                if(MSG_IndicatorLever_value == 0)
+                if(time_ms-last_sending_ms == 1000) // full blinking period
                 {
-                    blinking = 0;
+                    MSG_IndicatorLights_value = convert_IndicatorLever_to_IndicatorMSG(MSG_IndicatorLever_value);
+                    
+                    status = Rte_Write_MSG_IndicatorLights(MSG_IndicatorLights_value); 
+                    if (status != E_OK) return status;
+
+                    previousIndicatorStatus = MSG_IndicatorLever_value;
+                    
+                    if(MSG_IndicatorLever_value == 0)
+                    {
+                        blinking = 0;
+                    }
                 }
             }
             else if(previousIndicatorStatus == MSG_IndicatorLever_value) // same state

@@ -97,7 +97,7 @@ void test_ZSE_modules()
        ASSERT_TRUE(0, "Execution Input Controller Test 3"); 
     }
    
-    /*
+    
     set_Input_values(0, -70, 1, 1, 10);
     Input_Controller_runnable();
 
@@ -133,22 +133,22 @@ void test_ZSE_modules()
     {
        ASSERT_TRUE(0, "Execution Message Controller Test 1"); 
     }
-    */
 }
 
 void test_ZSE_full() 
 {
     test_suite_start("full ZSE ECU Tests");
 
-    MSG_IndicatorLights_value = 0;
-    MSG_CorneringLightStatus_value = 0;
-    MSG_LM_value = 0;
+    // Set in module tests
+    MSG_IndicatorLights_value = 0xF0;
+    MSG_CorneringLightStatus_value = 0x08;
+    MSG_LM_value = 0xF8;
 
-    set_Input_values(0, 0, 1, 0, 0); // messages from the 4 other ECUs - Hazard Light
+    set_Input_values(0, 0, 0, 0, 0); // messages from the 4 other ECUs - Hazard Light
 
     uint8_t correct_execution_ZSE = 0;
     uint8_t correct_execution_LM = 0;
-    for (size_t i = 0; i < 202; i++)
+    for (size_t i = 1; i < 402; i++)
     {
 
         /*-------------------------------------------------------------------*/
@@ -158,16 +158,18 @@ void test_ZSE_full()
         // Assert changes output
         //if(i==101) ASSERT_EQ(1, debug_cornering_light_status, "LM Hazard Light with Cornering Light left"); 
 
-        
+
         /*-------------------------------------------------------------------*/
         correct_execution_ZSE = scheduling_cycle_ZSE(); // Execution ZSE cycle
         if(correct_execution_ZSE) break;
 
         // Assert output
-        if(i==0) ASSERT_UINT8_EQ(0xF0, MSG_LM_value, "ZSE Hazard Light 1"); 
-        if(i==100) ASSERT_UINT8_EQ(0xF0, MSG_LM_value, "ZSE Hazard Light 2"); 
-        if(i==101) ASSERT_UINT8_EQ(0xF8, MSG_LM_value, "ZSE Hazard Light with Cornering Light left"); 
-
+        
+        if(i==101) ASSERT_UINT8_EQ(0xF0, MSG_LM_value, "ZSE Hazard Light 1");   
+        if(i==200) ASSERT_UINT8_EQ(0xF0, MSG_LM_value, "ZSE Hazard Light 2"); 
+        if(i==201) ASSERT_UINT8_EQ(0xF8, MSG_LM_value, "ZSE Hazard Light with Cornering Light left"); 
+        if(i==401) ASSERT_UINT8_EQ(0x00, MSG_LM_value, "All Inputs are zero");
+        
 
         /*-------------------------------------------------------------------*/
         correct_execution_LM = scheduling_cycle_LM_Module(); // Execution LM cycle
@@ -177,9 +179,12 @@ void test_ZSE_full()
         //if(i==0) ASSERT_EQ(1, debug_indicator_status, "LM Hazard Light 1");
         //if(i==100) ASSERT_EQ(1, debug_indicator_status, "LM Hazard Light 2"); 
         
+        if(i==100) ASSERT_UINT8_EQ(0x00, MSG_LM_value, "All off");
 
         /*---------------- Change Inputs ------------------------------------------*/ 
-        if(i==100) set_Input_values(0, -70, 1, 1, 10);
+        if(i==100) set_Input_values(0, 0, 1, 0, 0);
+        if(i==200) set_Input_values(0, -70, 1, 1, 10);
+        if(i==301) set_Input_values(0, 0, 0, 0, 0);
         
     }
 
