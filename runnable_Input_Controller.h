@@ -6,6 +6,6 @@
 #include "simulatedControllFlow.h"
 
 // Runnable
-ReturnType Input_Controller_runnable(void);
+Std_ReturnType Input_Controller_runnable(void);
 
 #endif 

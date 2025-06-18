@@ -7,7 +7,7 @@
 #include "simulatedControllFlow.h"
 
 // Runnable
-ReturnType Cornering_Light_Logic_runnable(void);
+Std_ReturnType Cornering_Light_Logic_runnable(void);
 
 
 #endif

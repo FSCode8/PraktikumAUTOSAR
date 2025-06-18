@@ -5,43 +5,52 @@
 #include <stddef.h>
 
 typedef enum {
-    OK,
-    ERROR
-} ReturnType;
+    E_OK,
+    E_NOT_OK
+} Std_ReturnType;
 
-#include "simulatedControllFlow.h"
+typedef uint8_t uint8;
+typedef uint16_t uint16;
+typedef uint32_t uint32;
+typedef uint64_t uint64;
+typedef int8_t int8;
+typedef int16_t int16;
+typedef int32_t int32;
+typedef int64_t int64;
+
+typedef uint8_t Pwm_ChannelType;
 
 // RTE Read functions
-ReturnType Rte_Read_IndicatorLever(int8_t* value);
-ReturnType Rte_Read_SteeringAngle(int16_t* value);
-ReturnType Rte_Read_HazardLightsStatus(uint8_t* value);
-ReturnType Rte_Read_CarLightsStatus(uint8_t* value);
-ReturnType Rte_Read_Velocity(int16_t* value);
+Std_ReturnType Rte_Read_IndicatorLever(int8_t* value);
+Std_ReturnType Rte_Read_SteeringAngle(int16_t* value);
+Std_ReturnType Rte_Read_HazardLightsStatus(uint8_t* value);
+Std_ReturnType Rte_Read_CarLightsStatus(uint8_t* value);
+Std_ReturnType Rte_Read_Velocity(int16_t* value);
 
-ReturnType Rte_Read_MSG_IndicatorLever(int8_t* value);
-ReturnType Rte_Read_MSG_HazardLightsStatus(uint8_t* value);
-ReturnType Rte_Read_MSG_SteeringAngle(int16_t* value);
-ReturnType Rte_Read_MSG_CarLightsStatus(uint8_t* value);
-ReturnType Rte_Read_MSG_Velocity(int16_t* value);
+Std_ReturnType Rte_Read_MSG_IndicatorLever(int8_t* value);
+Std_ReturnType Rte_Read_MSG_HazardLightsStatus(uint8_t* value);
+Std_ReturnType Rte_Read_MSG_SteeringAngle(int16_t* value);
+Std_ReturnType Rte_Read_MSG_CarLightsStatus(uint8_t* value);
+Std_ReturnType Rte_Read_MSG_Velocity(int16_t* value);
 
-ReturnType Rte_Read_MSG_IndicatorLights(uint8_t* value);
+Std_ReturnType Rte_Read_MSG_IndicatorLights(uint8_t* value);
 
-ReturnType Rte_Read_MSG_CornerLightsStatus(uint8_t* value);
+Std_ReturnType Rte_Read_MSG_CornerLightsStatus(uint8_t* value);
 
-ReturnType Rte_Read_MSG_LM(uint8_t* value);
+uint8 Rte_IRead_MSG_LM(void);
 
 // RTE Write functions
-ReturnType Rte_Write_MSG_IndicatorLever(int8_t value);
-ReturnType Rte_Write_MSG_SteeringAngle(int16_t value);
-ReturnType Rte_Write_MSG_HazardLightsStatus(uint8_t value);
-ReturnType Rte_Write_MSG_CarLightsStatus(uint8_t value);
-ReturnType Rte_Write_MSG_Velocity(int16_t value);
+Std_ReturnType Rte_Write_MSG_IndicatorLever(int8_t value);
+Std_ReturnType Rte_Write_MSG_SteeringAngle(int16_t value);
+Std_ReturnType Rte_Write_MSG_HazardLightsStatus(uint8_t value);
+Std_ReturnType Rte_Write_MSG_CarLightsStatus(uint8_t value);
+Std_ReturnType Rte_Write_MSG_Velocity(int16_t value);
 
-ReturnType Rte_Write_MSG_CornerLightsStatus(uint8_t value);
+Std_ReturnType Rte_Write_MSG_CornerLightsStatus(uint8_t value);
 
-ReturnType Rte_Write_MSG_IndicatorLights(uint8_t value);
+Std_ReturnType Rte_Write_MSG_IndicatorLights(uint8_t value);
 
-ReturnType Rte_Write_MSG_LM(uint8_t value);
+Std_ReturnType Rte_Write_MSG_LM(uint8_t value);
 
 // Extern variable declarations
 extern int8_t IndicatorLever_value; // 0 = neutral, 1 = right-tip, 2 = right-set, -1 = left-tip, -2 = left-set
@@ -63,5 +72,3 @@ extern uint8_t MSG_CorneringLightStatus_value; // 0000 1000 -> Left Cornering Li
 extern uint8_t MSG_LM_value; // 0000 0000 -> first four bits are for indicators, next four bits are for cornering lights 
 
 #endif // AUTOSAR_H
-
-

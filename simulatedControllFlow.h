@@ -5,8 +5,8 @@
 
 #include "autosar_simu.h"   
 
-void set_Input_values(int8_t IndicatorLever, int16_t SteeringAngle, uint8_t HazardLightsStatus, uint8_t CarLightsStatus, int16_t Velocity);
-ReturnType scheduling_cycle_ZSE(void);
-ReturnType scheduling_cycle_LM_Module(void);
+void set_Input_values(int8_t IndicatorLever, int16 SteeringAngle, uint8 HazardLightsStatus, uint8 CarLightsStatus, int16 Velocity);
+Std_ReturnType scheduling_cycle_ZSE(void);
+Std_ReturnType scheduling_cycle_LM_Module(void);
 
 #endif

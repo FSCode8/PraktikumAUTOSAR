@@ -1,29 +1,29 @@
 #include "runnable_Cornering_Light_Logic.h"
 
-ReturnType Cornering_Light_Logic_runnable(void)
+Std_ReturnType Cornering_Light_Logic_runnable(void)
 {
-    ReturnType status = OK;
+    Std_ReturnType status = E_OK;
 
     // declare variables
-    int16_t MSG_SteeringAngle_value = 0; // clockwise positive, counterclockwise negative
-    uint8_t MSG_CarLightsStatus_value = 0;  // 0 = off, 1 = on
-    int16_t MSG_Velocity_value = 0;     // in km/h, positive = forward, negative = backward
-    int8_t MSG_IndicatorLever_value = 0;    // 0 = neutral, 1 = right-tip, 2 = right-set, -1 = left-tip, -2 = left-set
+    int16 MSG_SteeringAngle_value = 0; // clockwise positive, counterclockwise negative
+    uint8 MSG_CarLightsStatus_value = 0;  // 0 = off, 1 = on
+    int16 MSG_Velocity_value = 0;     // in km/h, positive = forward, negative = backward
+    int8 MSG_IndicatorLever_value = 0;    // 0 = neutral, 1 = right-tip, 2 = right-set, -1 = left-tip, -2 = left-set
 
-    uint8_t MSG_IndicatorLights_value = 0;
+    uint8 MSG_IndicatorLights_value = 0;
 
     // Read values from RTE
     Rte_Read_MSG_IndicatorLever(&MSG_IndicatorLever_value);
-    if (status != OK) return status;
+    if (status != E_OK) return status;
     Rte_Read_MSG_SteeringAngle(&MSG_SteeringAngle_value);
-    if (status != OK) return status;
+    if (status != E_OK) return status;
     Rte_Read_MSG_CarLightsStatus(&MSG_CarLightsStatus_value);
-    if (status != OK) return status;
+    if (status != E_OK) return status;
     Rte_Read_MSG_Velocity(&MSG_Velocity_value);
-    if (status != OK) return status;
+    if (status != E_OK) return status;
 
     Rte_Read_MSG_IndicatorLights(&MSG_IndicatorLights_value);
-    if (status != OK) return status;
+    if (status != E_OK) return status;
 
     // #22
     if(MSG_Velocity_value > 70) // velocity is above 70 km/h 

@@ -6,6 +6,6 @@
 #include "autosar_simu.h"
 
 // Runnable
-ReturnType Message_Controller_runnable(void);
+Std_ReturnType Message_Controller_runnable(void);
 
 #endif

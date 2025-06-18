@@ -150,6 +150,15 @@ void test_ZSE_full()
     uint8_t correct_execution_LM = 0;
     for (size_t i = 0; i < 202; i++)
     {
+
+        /*-------------------------------------------------------------------*/
+        correct_execution_LM = scheduling_cycle_LM_Module(); // Execution LM cycle
+        if(correct_execution_LM) break;
+
+        // Assert changes output
+        //if(i==101) ASSERT_EQ(1, debug_cornering_light_status, "LM Hazard Light with Cornering Light left"); 
+
+        
         /*-------------------------------------------------------------------*/
         correct_execution_ZSE = scheduling_cycle_ZSE(); // Execution ZSE cycle
         if(correct_execution_ZSE) break;
@@ -159,13 +168,6 @@ void test_ZSE_full()
         if(i==100) ASSERT_UINT8_EQ(0xF0, MSG_LM_value, "ZSE Hazard Light 2"); 
         if(i==101) ASSERT_UINT8_EQ(0xF8, MSG_LM_value, "ZSE Hazard Light with Cornering Light left"); 
 
-        
-        /*-------------------------------------------------------------------*/
-        correct_execution_LM = scheduling_cycle_LM_Module(); // Execution LM cycle
-        if(correct_execution_LM) break;
-
-        // Assert changes output
-        //if(i==101) ASSERT_EQ(1, debug_cornering_light_status, "LM Hazard Light with Cornering Light left"); 
 
         /*-------------------------------------------------------------------*/
         correct_execution_LM = scheduling_cycle_LM_Module(); // Execution LM cycle

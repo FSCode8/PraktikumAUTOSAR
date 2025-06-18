@@ -7,7 +7,7 @@
 #include "simulatedControllFlow.h"
 
 // Runnable
-ReturnType Indicator_Light_Logic_runnable(void);
+Std_ReturnType Indicator_Light_Logic_runnable(void);
 
 
 #endif

@@ -8,3 +8,7 @@ General Architecture:
 
 Archtitecture of central ECU:
 ![ZSE_Composition](https://github.com/user-attachments/assets/9ca3b0e4-3738-4657-86f9-066aa25271ad)
+
+# Integration into D-Space Template
+- Copy Code into corresponding runnable
+- Replace uint_ with uint

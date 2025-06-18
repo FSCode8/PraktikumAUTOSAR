@@ -8,24 +8,24 @@
 
 
 // Variables inside the ZSE ECU
-int8_t MSG_IndicatorLever_value = 0;
-int16_t MSG_SteeringAngle_value = 0;
-uint8_t MSG_HazardLightsStatus_value = 0;
-uint8_t MSG_CarLightsStatus_value = 0;
-int16_t MSG_Velocity_value = 0;
+int8 MSG_IndicatorLever_value = 0;
+int16 MSG_SteeringAngle_value = 0;
+uint8 MSG_HazardLightsStatus_value = 0;
+uint8 MSG_CarLightsStatus_value = 0;
+int16 MSG_Velocity_value = 0;
 
-uint8_t MSG_IndicatorLights_value = 0;
+uint8 MSG_IndicatorLights_value = 0;
 
-uint8_t MSG_CorneringLightStatus_value = 0;
+uint8 MSG_CorneringLightStatus_value = 0;
 
-uint8_t MSG_LM_value = 0;
+uint8 MSG_LM_value = 0;
 
 // Variables from extern
-int8_t IndicatorLever_value = 0;
-int16_t SteeringAngle_value = 0;
-uint8_t HazardLightsStatus_value = 0;
-uint8_t CarLightsStatus_value = 0;
-int16_t Velocity_value = 0;
+int8 IndicatorLever_value = 0;
+int16 SteeringAngle_value = 0;
+uint8 HazardLightsStatus_value = 0;
+uint8 CarLightsStatus_value = 0;
+int16 Velocity_value = 0;
 
 int main()
 {
