@@ -98,7 +98,7 @@ Std_ReturnType control_indicator_light_special(uint8 toggle, uint8 LED_numb)
 
     SetStripeLedColor(LED_numb, toggle ? 255 : 0, toggle ? 255 : 0, 0); // Set to yellow
     
-    return UpdateLedStripe();;
+    return UpdateLedStripe();
 }
 
 Std_ReturnType LM_Controller_runnable(void)
@@ -116,7 +116,8 @@ Std_ReturnType LM_Controller_runnable(void)
     static uint64 time_stamp = 0;
     static uint8 steps_special = 0;
 
-    MSG_LM_value = Rte_IRead_MSG_LM();
+    status = Rte_Read_MSG_LM(&MSG_LM_value);
+    if (status != E_OK) return status;
 
     if(flag_position == 1)
     {

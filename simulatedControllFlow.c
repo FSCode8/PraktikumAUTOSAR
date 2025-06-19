@@ -9,7 +9,7 @@
 
 // Function 
 
-void set_Input_values(int8 IndicatorLever, int16 SteeringAngle, uint8 HazardLightsStatus, uint8 CarLightsStatus, int16 Velocity)
+void set_Input_values(sint8 IndicatorLever, sint16 SteeringAngle, uint8 HazardLightsStatus, uint8 CarLightsStatus, sint16 Velocity)
 {
     IndicatorLever_value = IndicatorLever;
     SteeringAngle_value = SteeringAngle;

@@ -1,6 +1,6 @@
 #include "runnable_Cornering_Light_Logic.h"
 
-uint8 convert_IndicatorLever_to_IndicatorMSG(int8 IndicatorStatus)
+uint8 convert_IndicatorLever_to_IndicatorMSG(sint8 IndicatorStatus)
 {
     switch(IndicatorStatus)
     {
@@ -30,14 +30,14 @@ Std_ReturnType Indicator_Light_Logic_runnable(void)
 {
     Std_ReturnType status = E_OK;
 
-    static int8 previousIndicatorStatus = 0; // 0 = neutral, 1 = right-tip, 2 = right-set, -1 = left-tip, -2 = left-set, 0x0F = hazard lights on
-    static int8 previous_MSG = 0;
+    static sint8 previousIndicatorStatus = 0; // 0 = neutral, 1 = right-tip, 2 = right-set, -1 = left-tip, -2 = left-set, 0x0F = hazard lights on
+    static sint8 previous_MSG = 0;
     static uint8 blinking = 0; // flag if it was blinking before, to keep the rythm
     static uint16 num_blink = 0; // count blink periods
     static uint64 time_ms = 0;
     static uint64 last_sending_ms = 0;
 
-    int8 MSG_IndicatorLever_value = 0; // 0 = neutral, 1 = right-tip, 2 = right-set, -1 = left-tip, -2 = left-set
+    sint8 MSG_IndicatorLever_value = 0; // 0 = neutral, 1 = right-tip, 2 = right-set, -1 = left-tip, -2 = left-set
     uint8 MSG_HazardLightsStatus_value = 0; // 0 = off, 1 = on
 
     uint8 MSG_IndicatorLights_value = 0;

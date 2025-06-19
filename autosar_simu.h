@@ -13,10 +13,10 @@ typedef uint8_t uint8;
 typedef uint16_t uint16;
 typedef uint32_t uint32;
 typedef uint64_t uint64;
-typedef int8_t int8;
-typedef int16_t int16;
-typedef int32_t int32;
-typedef int64_t int64;
+typedef int8_t sint8;
+typedef int16_t sint16;
+typedef int32_t sint32;
+typedef int64_t sint64;
 
 typedef uint8_t Pwm_ChannelType;
 
@@ -37,7 +37,7 @@ Std_ReturnType Rte_Read_MSG_IndicatorLights(uint8_t* value);
 
 Std_ReturnType Rte_Read_MSG_CornerLightsStatus(uint8_t* value);
 
-uint8 Rte_IRead_MSG_LM(void);
+Std_ReturnType Rte_Read_MSG_LM(uint8_t* value);
 
 // RTE Write functions
 Std_ReturnType Rte_Write_MSG_IndicatorLever(int8_t value);

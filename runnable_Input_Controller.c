@@ -5,11 +5,11 @@ Std_ReturnType Input_Controller_runnable(void)
     // Read the input values
     Std_ReturnType status = E_OK;
 
-    int8 IndicatorLever;
-    int16 SteeringAngle;
+    sint8 IndicatorLever;
+    sint16 SteeringAngle;
     uint8 HazardLightsStatus;
     uint8 CarLightsStatus;
-    int16 Velocity;
+    sint16 Velocity;
     
     // Read the input values
     status = Rte_Read_IndicatorLever(&IndicatorLever);

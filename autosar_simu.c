@@ -85,10 +85,12 @@ Std_ReturnType Rte_Read_MSG_CornerLightsStatus(uint8_t* value)
     return E_OK;
 }
 
-uint8 Rte_IRead_MSG_LM(void)
+Std_ReturnType Rte_Read_MSG_LM(uint8_t* value)
 {
     // Simulate reading the value from RTE
-    return MSG_LM_value;
+    if (value == NULL) return 1;  // error code
+    *value = MSG_LM_value; // Assume MSG_CorneringLightStatus_value is defined globally
+    return E_OK;
 }
 
 // ----------------------------------------------------------------------------------------------- //

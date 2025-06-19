@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "autosar_simu.h"
 #include "simulatedControllFlow.h"
 #include "runnable_Input_Controller.h"
 #include "runnable_Indicator_Logic.h"
@@ -8,11 +9,11 @@
 
 
 // Variables inside the ZSE ECU
-int8 MSG_IndicatorLever_value = 0;
-int16 MSG_SteeringAngle_value = 0;
+sint8 MSG_IndicatorLever_value = 0;
+sint16 MSG_SteeringAngle_value = 0;
 uint8 MSG_HazardLightsStatus_value = 0;
 uint8 MSG_CarLightsStatus_value = 0;
-int16 MSG_Velocity_value = 0;
+sint16 MSG_Velocity_value = 0;
 
 uint8 MSG_IndicatorLights_value = 0;
 
@@ -21,11 +22,11 @@ uint8 MSG_CorneringLightStatus_value = 0;
 uint8 MSG_LM_value = 0;
 
 // Variables from extern
-int8 IndicatorLever_value = 0;
-int16 SteeringAngle_value = 0;
+sint8 IndicatorLever_value = 0;
+sint16 SteeringAngle_value = 0;
 uint8 HazardLightsStatus_value = 0;
 uint8 CarLightsStatus_value = 0;
-int16 Velocity_value = 0;
+sint16 Velocity_value = 0;
 
 int main()
 {

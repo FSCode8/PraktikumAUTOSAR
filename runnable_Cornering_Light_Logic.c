@@ -5,10 +5,10 @@ Std_ReturnType Cornering_Light_Logic_runnable(void)
     Std_ReturnType status = E_OK;
 
     // declare variables
-    int16 MSG_SteeringAngle_value = 0; // clockwise positive, counterclockwise negative
+    sint16 MSG_SteeringAngle_value = 0; // clockwise positive, counterclockwise negative
     uint8 MSG_CarLightsStatus_value = 0;  // 0 = off, 1 = on
-    int16 MSG_Velocity_value = 0;     // in km/h, positive = forward, negative = backward
-    int8 MSG_IndicatorLever_value = 0;    // 0 = neutral, 1 = right-tip, 2 = right-set, -1 = left-tip, -2 = left-set
+    sint16 MSG_Velocity_value = 0;     // in km/h, positive = forward, negative = backward
+    sint8 MSG_IndicatorLever_value = 0;    // 0 = neutral, 1 = right-tip, 2 = right-set, -1 = left-tip, -2 = left-set
 
     uint8 MSG_IndicatorLights_value = 0;
 
